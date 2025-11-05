@@ -1,4 +1,11 @@
-import { RxHamburgerMenu } from "react-icons/rx";
+import { NavLink } from 'react-router-dom';
+import { RxHamburgerMenu } from 'react-icons/rx';
+
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'Register', path: '/register' },
+  { name: 'Sign In', path: '/signin' },
+];
 
 function Navbar() {
   return (
@@ -8,9 +15,11 @@ function Navbar() {
           Timely
         </h1>
         <ul className='hidden gap-5 md:flex'>
-          <li>Home</li>
-          <li>Register</li>
-          <li>Sign In</li>
+          {navLinks.map((navLink) => (
+            <li key={navLink.path}>
+              <NavLink to={navLink.path}>{navLink.name}</NavLink>
+            </li>
+          ))}
         </ul>
         <RxHamburgerMenu className='text-white text-4xl md:hidden' />
       </div>
