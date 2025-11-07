@@ -1,9 +1,9 @@
-import Navbar from './components/Navbar';
+import PublicNavbar from '../components/layout/PublicNavbar';
 
 function Home() {
     return (
         <>
-        <Navbar />
+        <PublicNavbar />
         <div className=' max-w-7xl lg:mx-auto px-6 py-4 mt-20 lg:flex lg:mt-40'>
         <div className='my-auto'>
           <h1 className='text-5xl md:text-7xl text-white'>Collect memories</h1>
