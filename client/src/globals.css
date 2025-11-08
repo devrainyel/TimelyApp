@@ -9,6 +9,8 @@
   --color-main: #aaaaaa;
   --color-accent: #f24547;
   --color-light-white: #ffdfda;
+
+  --breakpoint-xs: 30rem;
 }
 
 @layer base {
