@@ -8,14 +8,18 @@
   --color-hero: #ffffff;
   --color-main: #aaaaaa;
   --color-accent: #f24547;
-  --light-white: #ffdfda;
+  --color-light-white: #ffdfda;
 }
 
 @layer base {
   html,
-  body,
-  p {
+  body {
     background-color: var(--color-bg);
+    color: var(--color-main);
+    font-style: var(--font-body);
+  }
+
+  p {
     color: var(--color-main);
     font-style: var(--font-body);
   }
@@ -29,8 +33,17 @@
     @apply font-heading;
   }
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+@layer components {
   button {
-    background-color: var(--color-accent);
-    color: var(--light-white);
+    @apply cursor-pointer;
   }
 }

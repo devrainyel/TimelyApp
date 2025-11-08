@@ -4,7 +4,7 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'Register', path: '/register' },
-  { name: 'Sign In', path: '/signin' },
+  { name: 'Log In', path: '/login' },
 ];
 
 function Navbar() {

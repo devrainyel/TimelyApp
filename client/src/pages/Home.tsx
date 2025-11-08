@@ -17,7 +17,7 @@ function Home() {
             moments, connect with others, and relive the stories that make life
             meaningful
           </p>
-          <button className='text-sm py-2 px-3 md:py-3 md:px-5 mt-5 color-accent'>
+          <button className='text-sm py-2 px-3 md:py-3 md:px-5 mt-5 bg-accent text-light-white'>
             Create Account
           </button>
         </div>
