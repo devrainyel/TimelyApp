@@ -45,7 +45,37 @@
   }
 }
 
+@utility flex-center {
+  @apply flex justify-center items-center;
+}
+
+@utility glass {
+  @apply rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl;
+}
+
 @layer components {
+
+  header {
+     @apply sticky glass top-0 z-50;
+
+     nav {
+      @apply max-w-7xl mx-auto flex justify-between items-center px-6 py-4;
+     }
+
+     ul {
+      @apply hidden gap-5 md:flex;
+     }
+
+     .logo {
+      @apply text-2xl font-heading text-white tracking-wide;
+     }
+
+     .ham-menu {
+      @apply text-white text-4xl md:hidden;
+     }
+  }
+
+
   button {
     @apply cursor-pointer text-light-white;
   }
