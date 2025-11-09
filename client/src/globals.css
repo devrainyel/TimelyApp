@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+:root {
+
+}
+
 @theme {
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
@@ -10,6 +14,8 @@
   --color-accent: #f24547;
   --color-light-white: #ffdfda;
 
+  --spacing-128: 32rem;
+
   --breakpoint-xs: 30rem;
 }
 
@@ -18,12 +24,7 @@
   body {
     background-color: var(--color-bg);
     color: var(--color-main);
-    font-style: var(--font-body);
-  }
-
-  p {
-    color: var(--color-main);
-    font-style: var(--font-body);
+    font-family: var(--font-body);
   }
 
   h1,
@@ -46,6 +47,10 @@
 
 @layer components {
   button {
-    @apply cursor-pointer;
+    @apply cursor-pointer text-light-white;
+  }
+
+  .grid-image {
+    @apply w-full h-full object-cover rounded-lg;
   }
 }
