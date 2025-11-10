@@ -1,5 +1,4 @@
 import PublicNavbar from '../components/layout/PublicNavbar';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function Home() {
   return (
@@ -47,7 +46,7 @@ function Home() {
                       : 'col-span-1 row-span-1'
                   }
                 >
-                  <LazyLoadImage
+                  <img
                     src={`./${moment}.jpg`}
                     className="grid-image"
                     alt='moment-image'
