@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -8,6 +10,8 @@ const Login = () => {
   const showPass = () => {
     setShowPassword(!showPassword);
   };
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -45,15 +49,28 @@ const Login = () => {
                             'This is the Response:',
                             credentialResponse
                           );
+
+                          console.log(
+                            'This is the Response:',
+                            credentialResponse
+                          );
+
+                          if (credentialResponse.credential) {
+                            console.log(
+                              jwtDecode(credentialResponse.credential)
+                            );
+                            navigate("/dashboard");
+                          } else {
+                            console.error('No credential found in response');
+                          }
                         }}
                         onError={() => console.log('Login failed')}
                         theme='filled_black'
-                        width="100%"
+                        width='100%'
+                        auto_select={true}
                       />
                     </div>
-                    <p className='text-sm text-gray-400 mb-2 text-center'>
-                        or
-                      </p>
+                    <p className='text-sm text-gray-400 mb-2 text-center'>or</p>
                   </div>
 
                   <label htmlFor='email' className='mb-1 font-medium'>
