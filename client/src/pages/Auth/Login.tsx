@@ -2,16 +2,39 @@ import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 
-const Login = () => {
+const Login = ( { setUser }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const navigate = useNavigate();
+
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("/api/users/login", formData);
+      localStorage.setItem("token", res.data.token);
+      setUser(res.data);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed");
+    }
+  }
 
   const showPass = () => {
     setShowPassword(!showPassword);
   };
-
-  const navigate = useNavigate();
 
   return (
     <>
@@ -33,10 +56,10 @@ const Login = () => {
                 className='text-3xl font-semibold text-white mb-6'
               >
                 Time to share a moment. <br></br>
-                Log in to your Timely account
+                Log in to your Timely account.
               </h1>
 
-              <form action='/login' method='POST' className='space-y-5'>
+              <form onSubmit={handleSubmit} action='/login' method='POST' className='space-y-5'>
                 <div className='flex flex-col'>
                   <div className='space-y-5'>
                     <p className='text-sm text-gray-400 text-center'>
@@ -59,7 +82,7 @@ const Login = () => {
                             console.log(
                               jwtDecode(credentialResponse.credential)
                             );
-                            navigate("/dashboard");
+                            navigate('/dashboard');
                           } else {
                             console.error('No credential found in response');
                           }
@@ -77,9 +100,11 @@ const Login = () => {
                     Email address
                   </label>
                   <input
-                    type='email'
+                    type='text'
                     id='email'
                     name='email'
+                    value={formData.email}
+                    onChange={handleChange}
                     required
                     autoComplete='username'
                     className='border border-main rounded-md px-3 py-2 focus:outline-none  focus:border-accent'
@@ -95,8 +120,10 @@ const Login = () => {
                       type={showPassword ? 'text' : 'password'}
                       id='password'
                       name='password'
+                      value={formData.password}
+                      onChange={handleChange}
                       required
-                      autoComplete='current-password'
+                      autoComplete="new-password"
                       className='border border-main rounded-md px-3 py-2 focus:outline-none w-full focus:border-accent'
                     />
                     <button
@@ -110,6 +137,9 @@ const Login = () => {
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
                   </div>
+                  {error && (
+                    <p className='text-red-400 text-xs mt-2 italic'>{error}</p>
+                  )}
                 </div>
                 <button
                   type='submit'
@@ -120,9 +150,9 @@ const Login = () => {
               </form>
               <p className='mt-6 text-sm'>
                 Don’t have an account?{' '}
-                <a href='/register' className='hover:underline'>
+                <Link to='/register' className='hover:underline'>
                   Create one
-                </a>
+                </Link>
               </p>
             </div>
           </div>
