@@ -1,7 +1,9 @@
-import React from "react";
+import DashboardNavbar from "../../components/layout/DashboardNavbar";
 
 const Dashboard = ( { user, error } ) => {
   return (
+    <>
+    <DashboardNavbar user={user} error={error} />
     <div>
       {error && <p className='text-red-400 text-xs mt-2 italic'>{error}</p>}
       {user ? (
@@ -12,8 +14,8 @@ const Dashboard = ( { user, error } ) => {
           : <div></div>
          }
     </div>
+    </>
   )
 };
-
 
 export default Dashboard;
