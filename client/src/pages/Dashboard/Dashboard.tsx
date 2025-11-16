@@ -1,19 +1,19 @@
 import DashboardNavbar from "../../components/layout/DashboardNavbar";
 
-const Dashboard = ( { user, error } ) => {
+const Dashboard = ( { user, error, setUser } ) => {
   return (
     <>
-    <DashboardNavbar user={user} error={error} />
-    <div>
+    <DashboardNavbar user={user} setUser={setUser} error={error} />
+    <section>
       {error && <p className='text-red-400 text-xs mt-2 italic'>{error}</p>}
       {user ? (
-        <div>
+        <div className="max-w-7xl flex lg:mx-auto px-6">
           <h2>Welcome, {user.username}</h2>
           <p>{user.email}</p>
           </div> )
           : <div></div>
          }
-    </div>
+    </section>
     </>
   )
 };

@@ -6,7 +6,7 @@ function Home() {
       <PublicNavbar />
       <main>
         <section>
-          <div className=' max-w-7xl px-6 pt-20 lg:mx-auto lg:flex'>
+          <div className='max-w-7xl px-6 pt-20 lg:mx-auto lg:flex'>
             <div className='my-auto'>
               <h1 className='text-5xl md:text-7xl text-white'>
                 Collect memories <br></br>connect the moments

@@ -1,15 +1,17 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import Dashboard from './pages/Dashboard/Dashboard';
 import { useState, useEffect } from 'react';
+import NotFound from './pages/NotFound';
 import axios from 'axios';
 
 function App() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -20,22 +22,28 @@ function App() {
             headers: {Authorization: `Bearer ${token}`}
           })
           setUser(res.data);
+          setLoading(false);
         } catch (err) {
           setError("Failed to fetch user data");
           localStorage.removeItem("token");
+          setLoading(false);
         }
+      } else {
+        setLoading(false);
       }
     }
     fetchUser();
   }, [])
+   if (loading) return <div>Loading...</div>;
   return (
     <>
     <title>Timely</title>
       <Routes>
         <Route path='/' element={<Home />}></Route>
-        <Route path='/login' element={<Login setUser={setUser} />}></Route>
-        <Route path='/register' element={<Register setUser={setUser} />}></Route>
-        <Route path='/dashboard' element={<Dashboard user={user} error={error} />}></Route>
+        <Route path='/login' element={user ? <Navigate to="/dashboard" /> : <Login setUser={setUser} />}></Route>
+        <Route path='/register' element={user ? <Navigate to="/dashboard" /> : <Register setUser={setUser} />}></Route>
+        <Route path="/dashboard" element={<Dashboard user={user} setUser={setUser} error={error} />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   );
