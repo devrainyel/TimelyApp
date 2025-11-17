@@ -3,6 +3,7 @@ import Sidebar from '../../components/layout/Sidebar';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Loading from '../../components/ui/Loading';
+import Feed from '../Feed';
 
 const Dashboard = ({ user, error, setUser }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -10,9 +11,11 @@ const Dashboard = ({ user, error, setUser }) => {
   return user ? (
     <>
       <DashboardNavbar user={user} setUser={setUser} error={error} />
-      <section className='w-full flex h-screen '>
+      <section className='w-full flex'>
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className='flex-1'>This is the main content</div>
+        <div className='flex-1'>
+          <Feed />
+        </div>
         {sidebarOpen ? (
           <button
             onClick={() => setSidebarOpen(false)}

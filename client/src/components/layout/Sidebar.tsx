@@ -17,7 +17,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   return (
     <div
-      className={`px-10 flex flex-col items-center space-y-5 ${sidebarOpen ? 'translate-x-0' : 'max-sm:-translate-x-full'} transition-all duration-300 ease-in-out`}
+      className={`px-10 flex flex-col items-center space-y-5
+        max-sm:fixed max-sm:left-0 max-sm:top-16 max-sm:h-[calc(100vh-4rem)] max-sm:bg-[#0A0A0A] max-sm:z-40 max-sm:shadow-2xl max-sm:overflow-y-auto
+        ${sidebarOpen ? 'translate-x-0' : 'max-sm:-translate-x-full'} 
+        transition-all duration-300 ease-in-out`}
     >
       <div className='flex flex-col items-center mt-10'>
         <img
@@ -50,6 +53,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           ))}
         </ul>
       </div>
+      
       <button className='flex items-center bg-accent hover:bg-[#ff4b4e] text-sm py-2 px-3 mt-5 rounded-md'>
         <CirclePlus size={20} className='mr-2' />
         Create a Moment

@@ -36,7 +36,7 @@ const DashboardNavbar = ({ user, setUser, error }) => {
           <Link to='./' className='logo'>
             Timely
           </Link>
-          <div className='relative hidden lg:flex'>
+          <div className='relative hidden sm:flex'>
             <Search
               className='absolute left-8 top-1/2 -translate-y-1/2 text-gray-400'
               size={18}
@@ -49,7 +49,7 @@ const DashboardNavbar = ({ user, setUser, error }) => {
           </div>
           {!isSearchOpen && (
             <button
-              className='bg-[#0E0E0E] rounded-full p-2 ml-3 lg:hidden'
+              className='bg-[#0E0E0E] rounded-full p-2 ml-3 sm:hidden'
               onClick={handleShowSearch}
             >
               <Search className='text-gray-400' size={15} />

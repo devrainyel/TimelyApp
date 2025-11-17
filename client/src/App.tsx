@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import { useState, useEffect } from 'react';
 import NotFound from './pages/NotFound';
 import axios from 'axios';
+import Loading from './components/ui/Loading';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -34,7 +35,7 @@ function App() {
     }
     fetchUser();
   }, [])
-   if (loading) return <div>Loading...</div>;
+   if (loading) return <Loading />;
   return (
     <>
     <title>Timely</title>
