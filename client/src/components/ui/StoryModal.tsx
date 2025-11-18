@@ -1,5 +1,6 @@
-import { ArrowLeft, Palette, TextIcon } from 'lucide-react';
+import { ArrowLeft, Palette, Sparkle, TextIcon, Upload } from 'lucide-react';
 import React, { useState, useRef } from 'react';
+import toast from 'react-hot-toast';
 
 const StoryModal = ({ setShowModal, fetchStories }) => {
   const bgColors = ['#4f46e5', '#7c3aed', '#db2777', '#e11d48', '#ca8a04'];
@@ -10,7 +11,11 @@ const StoryModal = ({ setShowModal, fetchStories }) => {
   const [media, setMedia] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
 
-  const colorInputRef = useRef(null);
+  const colorPickerRef = useRef(null);
+
+  const handleOpenColorPicker = () => {
+    colorPickerRef.current?.click();
+  };
 
   const handleMediaUpload = (e) => {
     const file = e.target.files?.[0];
@@ -61,7 +66,7 @@ const StoryModal = ({ setShowModal, fetchStories }) => {
               <video src={previewUrl} className='object-contain max-h-full' />
             ))}
         </div>
-        <div className='flex mt-4 gap-2'>
+        <div className='flex items-center mt-4 gap-2'>
           {bgColors.map((color) => (
             <button
               key={color}
@@ -70,26 +75,57 @@ const StoryModal = ({ setShowModal, fetchStories }) => {
               onClick={() => setBackground(color)}
             />
           ))}
-          <div className="mt-20">
+          <button
+            onClick={handleOpenColorPicker}
+            className='w-7 h-7 rounded-full bg-white flex items-center justify-center text-black text-sm shadow'
+          >
+            🎨
+          </button>
           <input
             type='color'
-            ref={colorInputRef}
-            className='hidden'
+            ref={colorPickerRef}
+            className='absolute w-8 h-8 opacity-0'
             onChange={(e) => setBackground(e.target.value)}
           />
-          </div>
-          <button
-            onClick={() => colorInputRef.current.click()}
-            className='w-6 h-6 rounded-full flex items-center justify-center ring bg-white text-accent'
-          >
-            <Palette size={20} />
-          </button>
         </div>
 
         <div className='flex gap-2 mt-4'>
-          <button>
-            <TextIcon />
+          <button
+            onClick={() => {
+              setMode('text');
+              setMedia(null);
+              setPreviewUrl(null);
+            }}
+            className={`flex-1 flex items-center justify-center gap-2 p-2 rounded ${
+              mode === 'text' ? 'bg-white text-black' : 'bg-zinc-800'
+            }`}
+          >
+            <TextIcon /> Text
           </button>
+          <label
+            className={`flex-1 flex items-center justify-center gap-2 p-2 rounded cursor-pointer ${
+              mode === 'media' ? 'bg-white text-black' : 'bg-zinc-800'
+            }`}
+          >
+            <Upload /> Photo/Video
+            <input
+              type='file'
+              accept='image/*,video/*'
+              className='hidden'
+              onChange={(e) => {
+                handleMediaUpload(e);
+                setMode('media');
+              }}
+            />
+          </label>
+        </div>
+        <div className='mt-10 space-y-3'>
+          <button onClick={() => toast.promise(handleCreateStory(), {
+            loading: 'Saving...',
+            success: <p>Story Created!</p>,
+            error: e => <p>{e.message}</p>
+          })} className="flex items-center justify-center gap-2 bg-accent hover:bg-[#ff4b4e] py-5 rounded w-full"><Sparkle size={18} />Share Story</button>
+          <button className="bg-zinc-800 w-full p-2 rounded">Discard</button>
         </div>
       </div>
     </div>

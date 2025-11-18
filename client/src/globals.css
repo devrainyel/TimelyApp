@@ -53,6 +53,11 @@
   @apply rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl;
 }
 
+  .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
 @layer components {
 
   header {
