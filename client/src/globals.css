@@ -53,11 +53,6 @@
   @apply rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl;
 }
 
-  .no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-
 @layer components {
 
   header {
@@ -80,7 +75,6 @@
      }
   }
 
-
   button {
     @apply cursor-pointer text-light-white;
   }
@@ -88,4 +82,8 @@
   .grid-image {
     @apply w-full h-full object-cover rounded-lg;
   }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
