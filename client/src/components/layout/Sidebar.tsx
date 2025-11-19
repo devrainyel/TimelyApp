@@ -1,12 +1,13 @@
 import { House, Users, Camera, MessagesSquare, CirclePlus } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const sidebarLinks = [
     { label: 'Feed', icon: <House /> },
     { label: 'Connections', icon: <Users /> },
     { label: 'Moments', icon: <Camera /> },
-    { label: 'Messages', icon: <MessagesSquare /> },
+    { label: 'Messages', to: '/messages' , icon: <MessagesSquare /> },
   ];
 
   const socialStats = [
@@ -40,15 +41,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </div>
       <div className='space-x-5 w-62 bg-[#0E0E0E] p-3 rounded-md'>
         <ul className='space-y-3'>
-          {sidebarLinks.map(({ label, icon }) => (
+          {sidebarLinks.map(({ label, icon, to }) => (
             <li
               key={label}
               className='hover:bg-[#1b1b1b] cursor-pointer rounded-md'
             >
-              <a className='flex items-center space-x-2 py-5 pl-2'>
+              <Link to={to} className='flex items-center space-x-2 py-5 pl-2'>
                 {icon}
                 <p className='text-sm'>{label}</p>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

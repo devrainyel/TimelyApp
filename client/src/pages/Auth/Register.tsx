@@ -27,7 +27,7 @@ const Register = ( { setUser }) => {
       const res = await axios.post("/api/users/register", formData);
       localStorage.setItem("token", res.data.token);
       setUser(res.data);
-      navigate('/dashboard');
+      navigate('/feed');
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
     }
@@ -82,7 +82,7 @@ const Register = ( { setUser }) => {
                             console.log(
                               jwtDecode(credentialResponse.credential)
                             );
-                            navigate('/dashboard');
+                            navigate('/feed');
                           } else {
                             console.error('No credential found in response');
                           }

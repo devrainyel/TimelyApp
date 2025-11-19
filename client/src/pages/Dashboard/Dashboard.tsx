@@ -3,7 +3,8 @@ import Sidebar from '../../components/layout/Sidebar';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Loading from '../../components/ui/Loading';
-import Feed from '../Feed';
+// import Feed from '../Feed';
+import { Outlet } from 'react-router-dom';
 
 const Dashboard = ({ user, error, setUser }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,7 +15,7 @@ const Dashboard = ({ user, error, setUser }) => {
       <section className='w-full flex'>
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className='flex-1'>
-          <Feed />
+          <Outlet />
         </div>
         {sidebarOpen ? (
           <button
