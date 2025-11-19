@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const sidebarLinks = [
-    { label: 'Feed', icon: <House /> },
+    { label: 'Feed', to: '/feed', icon: <House /> },
     { label: 'Connections', icon: <Users /> },
     { label: 'Moments', icon: <Camera /> },
     { label: 'Messages', to: '/messages' , icon: <MessagesSquare /> },
